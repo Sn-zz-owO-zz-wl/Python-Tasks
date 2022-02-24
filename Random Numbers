@@ -1,0 +1,12 @@
+import random
+x = random.randint(1, 101)
+while x:
+    print('Введите число')
+    s = int(input())
+    if x == s:
+        break
+    elif x > s:
+        print("Слишком мало, попробуйте еще раз")
+    else:
+        print('Слишком много, попробуйте еще раз')
+print('Вы угадали, поздравляем!')
