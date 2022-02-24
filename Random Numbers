@@ -1,11 +1,15 @@
 import random
 print('Добро пожаловать в числовую угадайку')
 x = random.randint(1, 101)
+def is_valid(num):
+    return num.isdigit() and 0 <= num <= 100
 while x:
     print('Введите число')
     s = int(input())
     if x == s:
         break
+    elif is_valid(s) == False:
+        print('Неверно введенный данные. Введите число от 0 до 100')    
     elif x > s:
         print("Слишком мало, попробуйте еще раз")
     else:
