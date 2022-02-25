@@ -1,18 +1,40 @@
 import random
-print('Добро пожаловать в числовую угадайку')
-x = random.randint(1, 101)
+from time import sleep
+
+def new_game_choice():
+    print('Для начала игры введите 1.')
+    return input()
+def new_game(user_choice):
+    if user_choice != 1 and user_choice != '1':
+        sleep(0.5)
+        exit("Очень жаль, приходите еще")
+    else:
+        print('Введите уровень сложности 1 - легкий, 2 - средний, 3 - тяжелый')
+    return
 def is_valid(num):
-    return num.isdigit() and 0 <= int(num) <= 100
+    return num.isdigit() and 0 <= int(num) <= int(right_digit)
+
+print('Добро пожаловать в числовую угадайку')
+
+new_game(new_game_choice())
+sleep(0.5)
+count = 0
+difficult = int(input())
+
 while x:
-    print('Введите число от 0 до 100')
+    print('Введите число от 0 до', right_digit)
     s = input()
     is_valid(s)
     if x == int(s):
         break
     elif is_valid(s) == False:
-        print('Неверно введенный данные. Введите число от 0 до 100')    
+        print('Неверно введенный данные. Введите число от 0 до', right_digit)    
     elif x > int(s):
         print("Слишком мало, попробуйте еще раз")
     else:
         print('Слишком много, попробуйте еще раз')
-print('Вы угадали, поздравляем!')
+print('Вы угадали, c', count, 'попытки, поздравляем!')
+sleep(1)
+print('Спасибо, что играли в числовую угадайку. Сыграем еще?')
+new_game(new_game_choice())
+sleep(1)
