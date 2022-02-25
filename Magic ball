@@ -1,0 +1,27 @@
+import random
+
+def input_question():
+    print('Задайте любой, волнующий вас, вопрос, чтобы на него можно было ответить \"Да" или "Нет"')
+    return input()
+def print_answer(a):
+    random.randrange(20)
+    print(all_answers[random.randrange(20)])
+
+         
+
+
+positive_answers = ['Бесспорно', 'Предрешено', 'Никаких сомнений', 'Можешь быть уверен в этом', 'Определенно, да']
+faint_positive_answers = ['Мне кажется - да', 'Вероятнее всего', 'Хорошие перспективы', 'Знаки говорят - да', 'Да']
+neutral_answers = ['Пока неясно, попробуй снова', 'Спроси позже', 'Лучше не рассказывать', 'Сейчас нельзя предсказать', 'Сконцентрируйся и спроси опять']
+negative_answers = ['Даже не думай', 'Мой ответ - нет', 'По моим данным - нет', 'Перспективы не очень хорошие', 'Весьма сомнительно']
+all_answers = positive_answers + faint_positive_answers + neutral_answers + negative_answers
+
+while True:
+    input_question()
+    print_answer(all_answers)
+    ans = input('У вас есть еще вопрос? Да(Д) или Yes(Y) для вопроса: ')
+    if ans.lower() in ('да', 'д', 'yes', 'y'):
+        continue
+    else:
+        exit('Пусть удача улыбнется тебе')
+    
