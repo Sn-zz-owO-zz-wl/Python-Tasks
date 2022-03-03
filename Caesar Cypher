@@ -1,0 +1,40 @@
+#Функция выбора языка для шифрования
+def language_choice():
+    ans = input('Выберите язык шифрования. \n русский - R. английский - E: ')
+    if ans.lower() in ('r', 'R', 'р', 'Р'):
+        alphabet_h = 'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ' 
+        alphabet_l = 'абвгдежзийклмнопрстуфхцчшщъыьэюя'
+        coefficient = 32
+        selected_language = 'русский'
+        return cypher(alphabet_h,  alphabet_l, coefficient, selected_language)
+    elif ans.lower() in ('E', 'e', 'А', 'а'):
+        alphabet_h = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 
+        alphabet_l = 'abcdefghijklmnopqrstuvwxyz'
+        coefficient = 26
+        selected_language = 'английский'
+        return cypher(alphabet_h,  alphabet_l, coefficient, selected_language)
+    else:
+        exit('В базе нет данного языка')
+    
+#Функция шифрования
+def cypher(high, low, с, language):
+    s = input('Выбранный язык {0} введите фразу: '.format(language))
+    key = int(input('Выберите ключ шифрования(шаг сдвига вправо) число от 1 до {0}: '.format(len(high))))
+    s_cypher = ''
+    for _ in range(len(s)):
+        if s[_] in high:
+            if high.find(s[_]) >= len(high) - key:
+                s_cypher += high[high.find(s[_]) - с + key] 
+            else:    
+                s_cypher += high[high.find(s[_]) + key]
+        elif s[_] in low:
+            if low.find(s[_]) >= len(high) - key:
+                s_cypher += low[low.find(s[_]) - с + key] 
+            else:    
+                s_cypher += low[low.find(s[_]) + key]
+        else:
+            s_cypher += s[_]
+    print(s_cypher)
+
+print('Добро пожаловать в программу шифрования Цезаря')
+language_choice()
