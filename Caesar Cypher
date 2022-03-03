@@ -1,4 +1,5 @@
 #Функция выбора языка для шифрования
+from time import sleep
 def language_choice():
     ans = input('Выберите язык шифрования. \n русский - R. английский - E: ')
     if ans.lower() in ('r', 'R', 'р', 'Р'):
@@ -6,35 +7,69 @@ def language_choice():
         alphabet_l = 'абвгдежзийклмнопрстуфхцчшщъыьэюя'
         coefficient = 32
         selected_language = 'русский'
-        return cypher(alphabet_h,  alphabet_l, coefficient, selected_language)
+        return cypher_choice(alphabet_h,  alphabet_l, coefficient, selected_language)
     elif ans.lower() in ('E', 'e', 'А', 'а'):
         alphabet_h = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 
         alphabet_l = 'abcdefghijklmnopqrstuvwxyz'
         coefficient = 26
         selected_language = 'английский'
-        return cypher(alphabet_h,  alphabet_l, coefficient, selected_language)
+        return cypher_choice(alphabet_h,  alphabet_l, coefficient, selected_language)
     else:
         exit('В базе нет данного языка')
+
+def cypher_choice(alphabet_h,  alphabet_l, coefficient, selected_language):
+    ans = int(input('Что вы хотите? Для шифрования нажмите - 1, для дешифровки - 2: '))
+    if ans == 1:
+        return cypher(alphabet_h,  alphabet_l, coefficient, selected_language)
+    elif ans == 2:
+        return decypher(alphabet_h,  alphabet_l, coefficient, selected_language)
     
 #Функция шифрования
 def cypher(high, low, с, language):
+    s_cypher = ''
     s = input('Выбранный язык {0} введите фразу: '.format(language))
     key = int(input('Выберите ключ шифрования(шаг сдвига вправо) число от 1 до {0}: '.format(len(high))))
-    s_cypher = ''
-    for _ in range(len(s)):
-        if s[_] in high:
-            if high.find(s[_]) >= len(high) - key:
-                s_cypher += high[high.find(s[_]) - с + key] 
-            else:    
-                s_cypher += high[high.find(s[_]) + key]
-        elif s[_] in low:
-            if low.find(s[_]) >= len(high) - key:
-                s_cypher += low[low.find(s[_]) - с + key] 
-            else:    
-                s_cypher += low[low.find(s[_]) + key]
-        else:
-            s_cypher += s[_]
+    if -с < key < с:
+        for _ in range(len(s)):
+            if s[_] in high:
+                if high.find(s[_]) >= len(high) - key:
+                    s_cypher += high[high.find(s[_]) - с + key] 
+                else:    
+                    s_cypher += high[high.find(s[_]) + key]
+            elif s[_] in low:
+                if low.find(s[_]) >= len(high) - key:
+                    s_cypher += low[low.find(s[_]) - с + key] 
+                else:    
+                    s_cypher += low[low.find(s[_]) + key]
+            else:
+                s_cypher += s[_]
+    else:
+        return exit('Выбранное число не входит в нужный диапозон')
     print(s_cypher)
+
+#Функция дешифровки
+def decypher(high, low, с, language):
+    s_cypher = ''
+    s = input('Выбранный язык {0} введите зашифрованную фразу: '.format(language))
+    key = 0
+    while key <= с:
+        key += 1
+        for _ in range(len(s)):
+            if s[_] in high:
+                if high.find(s[_]) >= len(high) - key:
+                    s_cypher += high[high.find(s[_]) - с + key] 
+                else:    
+                    s_cypher += high[high.find(s[_]) + key]
+            elif s[_] in low:
+                if low.find(s[_]) >= len(high) - key:
+                    s_cypher += low[low.find(s[_]) - с + key] 
+                else:    
+                    s_cypher += low[low.find(s[_]) + key]
+            else:
+                s_cypher += s[_]
+        sleep(0.3)
+        print('Возможный вариант фразы:', s_cypher, end = '\n')
+        s_cypher = ''
 
 print('Добро пожаловать в программу шифрования Цезаря')
 language_choice()
