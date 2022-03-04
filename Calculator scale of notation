@@ -1,40 +1,48 @@
-#Перевод из двоичной в десятичную
-def bin_to_dec():
+#Перевод в десятичную из систем счисления до десятичной
+def bin_to_dec(base):
     num = input('Введите число: ')
     count = 1
     total = 0
     for _ in range(len(num)):
         x = len(num) - count
         count += 1
-        total += int(num[_]) * 2**x
-    return print(total)
+        total += int(num[_]) * int(base)**x
+    return print(total), greetings()
         
-#Перевод из восьмиричной в десятичную
-def oct_to_dec():
-    pass
-#Перевод из шестнадцатиричной в десятичную
-def hex_to_dec():
+
+#Перевод в десятичную из систем после десятичной
+def hex_to_dec(base):
     num = input('Введите число: ')
     count = 1
     total = 0
     for _ in range(len(num)):
         x = len(num) - count
         count += 1
-        if num[_].isdigit == False:
-            total += (ord(num[_])-55) * 16**x
+        if num[_].isdigit():
+            total += int(num[_]) * int(base)**x
         else: 
-            total += int(num[_]) * 16**x
-    return print(total)
+            total += (ord(num[_])-55) * int(base)**x
+    return print(total), greetings()
     
 #Функция выбора системы счисления из которой перевести
 def choice():
-    ans = input('Выберите систему счисления из которой требуется перевести число: \n1 - Двоичная\n2 - Восьмиричная\n3 - Шестнадцатиричная\n')
-    if int(ans) == 1:
-        bin_to_dec()
-    elif int(ans) == 2:
-        oct_to_dec()
-    elif int(ans) == 3:
-        hex_to_dec()
+    ans = input('Введите систему счисления от 1 до 16 включительно из которой требуется перевести число: )
+    while ans.isdigit():
+        if 0 < int(ans) < 10 :
+            bin_to_dec(ans)
+        elif int(ans) > 9:
+            hex_to_dec(ans)
+        else:
+            print('Некорректно введена система счисления')
+            choice()
 
-choice()
+#Функция приветствия 
+def greetings():
+    answer = input('Хотите перевести число в другую систему счисления? Д - да, Н - нет: ')
+    if answer.lower() in ('да', 'д', 'yes', 'y'):
+        choice()
+    else:
+        answer = False
+        exit('ПОКА!')
 
+greetings()
