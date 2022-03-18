@@ -1,0 +1,13 @@
+n = int(input())
+k = int(input())
+circle = []
+for i in range(n):
+    circle.append(i + 1)
+
+while len(circle) > 1: 
+    for i in range(k-1):
+        circle.append(circle[0])
+        del circle[0]
+    del circle[0]
+
+print(circle[0])
