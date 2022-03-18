@@ -1,0 +1,22 @@
+#quarter coordinates
+s = int(input())
+quarter1 = 0 
+quarter2 = 0 
+quarter3 = 0
+quarter4 = 0 
+lst = []
+for i in range(s):
+    lst.append(input().split())
+for i in range(len(lst)):
+    if int(lst[i][0]) > 0 and int(lst[i][1]) > 0:
+        quarter1 += 1
+    elif int(lst[i][0]) < 0 and int(lst[i][1]) > 0:
+        quarter2 += 1
+    elif int(lst[i][0]) < 0 and int(lst[i][1]) < 0:
+        quarter3 += 1
+    elif int(lst[i][0]) > 0 and int(lst[i][1]) < 0:
+        quarter4 += 1
+print('Первая четверть:', quarter1, '\n'
+'Вторая четверть:', quarter2, '\n'
+'Третья четверть:', quarter3, '\n'
+'Четвертая четверть:', quarter4)
