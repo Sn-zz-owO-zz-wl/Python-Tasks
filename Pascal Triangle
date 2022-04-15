@@ -1,0 +1,11 @@
+import math
+lst = []
+d = int(input())
+for i in range(d+1):
+    t = (math.factorial(i) * math.factorial(d - i))
+    if t != 0:
+        s = int(math.factorial(d) / (math.factorial(i) * math.factorial(d - i)))  
+    else:
+        s = 1
+    lst.append(s)
+print(lst)
