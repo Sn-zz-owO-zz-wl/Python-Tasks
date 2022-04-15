@@ -1,1 +1,14 @@
+#Thief
+from random import randint
+def map_liner():
+    map_line = []
+    for _ in range(map_size):
+        map_line.append(randint(0, 9))
+    return map_line
+
+map_height = []
+map_size = int(input())
+
+for j in range(map_size):
+    print(map_liner())
 
